@@ -38,7 +38,7 @@ Los aciertos sin pista suman 100 puntos por el multiplicador, que sube cada dos 
 
 El botón `?` de cada misión muestra ayuda gratuita al pasar el puntero, enfocar con teclado o pulsar. Explica el objetivo y no altera racha, puntos ni contador de pistas.
 
-«Revelar destino» y H muestran una pista concreta en un diálogo que detiene el pilotaje mientras se lee. Se identifica el objetivo y se explica el coste: su próximo acierto dará 40 puntos y reiniciará la racha. El objetivo queda marcado hasta que se realiza ese acierto. Volver a consultar la misma pista no vuelve a contabilizarla. Las pistas se aplican al objetivo indicado, aunque se resuelvan otros antes.
+«Explicar la pista» y H muestran una pista explicativa en un diálogo que detiene el pilotaje mientras se lee. Se identifica el objetivo y se explica el coste: su próximo acierto dará 40 puntos y reiniciará la racha. El objetivo queda marcado hasta que se realiza ese acierto. Volver a consultar la misma pista no vuelve a contabilizarla. Las pistas se aplican al objetivo indicado, aunque se resuelvan otros antes.
 
 La guía es gratuita e incluye funciones, materiales, puntuación, contenido educativo, referencias y límites del modelo. Los textos son para todo el público.
 
@@ -85,3 +85,9 @@ Los récords se guardan en el navegador: los del servidor local no se trasladan 
 Validación táctil: pruebas automatizadas de desplazamiento analógico, dos identificadores de puntero, cancelación/pausa, impulso simultáneo, misma puntuación de entrega y dibujo ampliado. Diseño inspeccionado en viewport móvil. Pendiente valorar comodidad y precisión de los pulgares en un smartphone físico.
 
 El diálogo móvil reutiliza el panel original, sin duplicar objetivos ni progreso. Cerrar la ventana conserva una pausa manual previa. El escenario y los controles caben en la altura de la pantalla móvil; solo el contenido largo del diálogo puede desplazarse.
+
+## Criterio de redacción educativa
+
+ESO utiliza vocabulario científico con explicaciones breves: fotosíntesis (ficha FS), respiración celular, síntesis de proteínas y lípidos, digestión celular, turgencia e información genética. Mantiene encargos independientes, sin ATP ni cadenas de procesos. En Bachillerato las pistas relacionan sustratos, productos, energía y organización celular.
+
+La ayuda contextual define el proceso; la pista combina explicación funcional y rasgos de la estructura para deducir el destino; el mensaje de acierto identifica y explica la relación correcta. La guía permite consultar las funciones explícitamente. No se añaden operaciones repetidas ni se cambia la puntuación en esta revisión.
