@@ -11,7 +11,7 @@ npm run build
 node tests/game.cjs
 ```
 
-En smartphone se activan joystick y botones: Entregar, Impulso, Soltar y Ampliar/Ver mapa. El joystick admite precisión de velocidad y movimiento simultáneo con el impulso. «Ampliar» sigue la nave a 1,8×. No cambia los objetivos ni la puntuación y no automatiza destinos. Las misiones siguen debajo del escenario en pantallas estrechas. Se recomienda orientación vertical. Desde «Guía → Cómo pilotar» se puede activar o desactivar este método; el teclado sigue disponible.
+En smartphone se activan joystick y botones: Entregar, Impulso, Soltar y Ampliar/Ver mapa. El joystick admite precisión de velocidad y movimiento simultáneo con el impulso. «Ampliar» sigue la nave a 1,8×. No cambia los objetivos ni la puntuación y no automatiza destinos. En móvil, el botón «Misiones» abre los objetivos en un diálogo que detiene el pilotaje. El mismo panel permite consultar ayudas, revelar pistas y elegir célula; al cerrarlo se vuelve al juego. En escritorio se conserva el panel lateral. Se recomienda orientación vertical. Desde «Guía → Cómo pilotar» se puede activar o desactivar este método; el teclado sigue disponible.
 
 El gesto del joystick no desplaza la página; fuera de los controles se conserva el scroll y el zoom del navegador. Pausar, abrir paneles, cambiar de célula, girar la pantalla o interrumpir un gesto cancela el movimiento. El diseño y controles de escritorio se mantienen cuando el modo táctil está desactivado.
 
@@ -83,3 +83,5 @@ Para publicar una actualización, ejecuta `npm ci`, `npm test` y `npm run build`
 Los récords se guardan en el navegador: los del servidor local no se trasladan al dominio público.
 
 Validación táctil: pruebas automatizadas de desplazamiento analógico, dos identificadores de puntero, cancelación/pausa, impulso simultáneo, misma puntuación de entrega y dibujo ampliado. Diseño inspeccionado en viewport móvil. Pendiente valorar comodidad y precisión de los pulgares en un smartphone físico.
+
+El diálogo móvil reutiliza el panel original, sin duplicar objetivos ni progreso. Cerrar la ventana conserva una pausa manual previa. El escenario y los controles caben en la altura de la pantalla móvil; solo el contenido largo del diálogo puede desplazarse.

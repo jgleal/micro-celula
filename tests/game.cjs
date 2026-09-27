@@ -1,10 +1,10 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const elements=new Map(),context=new Proxy({},{get:(_t,key)=>key==='createRadialGradient'||key==='createLinearGradient'?()=>({addColorStop(){}}):()=>{},set:()=>true});
-function element(id){if(!elements.has(id))elements.set(id,{textContent:'',innerHTML:'',style:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},getContext(){return context},getBoundingClientRect(){return {width:900,height:600}},focus(){},setPointerCapture(){},matches(){return false},showModal(){},close(){},showPopover(){},hidePopover(){},onclick:null});return elements.get(id)}
+function element(id){if(!elements.has(id))elements.set(id,{textContent:'',innerHTML:'',style:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},getContext(){return context},getBoundingClientRect(){return {width:900,height:600}},append(){},focus(){},setPointerCapture(){},matches(){return false},showModal(){this.open=true},close(){this.open=false},showPopover(){},hidePopover(){},onclick:null});return elements.get(id)}
 const audioEvents=[];const param=()=>({setValueAtTime(v,t){audioEvents.push(['value',v,t])},setTargetAtTime(v,t){audioEvents.push(['target',v,t])},exponentialRampToValueAtTime(){}});
 class AudioContext{constructor(){this.currentTime=0;this.destination={}}resume(){return Promise.resolve()}createGain(){return {gain:param(),connect(){},disconnect(){}}}createOscillator(){return {frequency:param(),connect(){},disconnect(){},start(t){audioEvents.push(['start',t])},stop(){}}}}
 const storage=new Map();
-const sandbox={document:{getElementById:element,addEventListener(){}},window:{AudioContext,addEventListener(){}},requestAnimationFrame(){},devicePixelRatio:1,localStorage:{getItem(k){return storage.get(k)??null},setItem(k,v){storage.set(k,String(v))}},setTimeout(){},clearTimeout(){},Math,Number,Array,Set,assert,audioEvents};
+const sandbox={document:{getElementById:element,querySelector(){return element('layout')},addEventListener(){}},window:{AudioContext,addEventListener(){}},requestAnimationFrame(){},devicePixelRatio:1,localStorage:{getItem(k){return storage.get(k)??null},setItem(k,v){storage.set(k,String(v))}},setTimeout(){},clearTimeout(){},Math,Number,Array,Set,assert,audioEvents};
 vm.runInNewContext(fs.readFileSync('main.js','utf8')+`
 function send(cargo,dest){s.cargo=cargo.slice();deliver(dest)}
 function revealHint(dest){hint(dest);uiHelpOpen=false}
@@ -124,4 +124,11 @@ start();s.cargo=['lip'];s.player={...s.player,x:structures.rel.x,y:structures.re
 touch.zoom=true;draw();touch.zoom=false;touch.enabled=false;draw();
 $('touch-stick').getBoundingClientRect=originalRect;
 assert.ok(!controlText('Pulsa E').includes('Entregar'));
+// Mission modal pauses only its own surface and preserves an explicit pause.
+start();touch.enabled=true;touch.x=1;openMissions();assert.equal(active(),false);assert.equal(touch.x,0);const modalX=s.player.x;update(.04);assert.equal(s.player.x,modalX);assert.equal(canReadHint(),true);
+hint('rel');assert.equal(uiHelpOpen,true);uiHelpOpen=false;assert.equal(active(),false);
+closeMissions();assert.equal(uiMissionsOpen,false);assert.equal(active(),true);
+togglePause();openMissions();closeMissions();assert.equal(paused,true);assert.equal(active(),false);togglePause();
+openMissions();selectCell(1);assert.equal(uiMissionsOpen,false);assert.equal(s.level,1);assert.equal(running,false);
+touch.enabled=false;
 `,sandbox);console.log('OK: ambos cursos completos, recursos finitos, funciones independientes ESO, rutas Bach, récords separados, membranas, controles y audio.');
