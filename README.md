@@ -1,6 +1,6 @@
 # Micro · misión vida
 
-Juego de navegador para Biología de 1º de ESO y 1º de Bachillerato, con referencia curricular de Andalucía. Pilotaje con teclado, objetivos simultáneos y partidas cortas sin cuenta atrás. El conocimiento mantiene las rachas de puntos; la velocidad no puntúa. No ofrece controles táctiles.
+Juego de navegador para Biología de 1º de ESO y 1º de Bachillerato, con referencia curricular de Andalucía. Pilotaje con teclado, objetivos simultáneos y partidas cortas sin cuenta atrás. El conocimiento mantiene las rachas de puntos; la velocidad no puntúa. Ofrece controles de teclado y una modalidad táctil adicional.
 
 ## Ejecutar y comprobar
 
@@ -10,6 +10,10 @@ npm run dev
 npm run build
 node tests/game.cjs
 ```
+
+En smartphone se activan joystick y botones: Entregar, Impulso, Soltar y Ampliar/Ver mapa. El joystick admite precisión de velocidad y movimiento simultáneo con el impulso. «Ampliar» sigue la nave a 1,8×. No cambia los objetivos ni la puntuación y no automatiza destinos. Las misiones siguen debajo del escenario en pantallas estrechas. Se recomienda orientación vertical. Desde «Guía → Cómo pilotar» se puede activar o desactivar este método; el teclado sigue disponible.
+
+El gesto del joystick no desplaza la página; fuera de los controles se conserva el scroll y el zoom del navegador. Pausar, abrir paneles, cambiar de célula, girar la pantalla o interrumpir un gesto cancela el movimiento. El diseño y controles de escritorio se mantienen cuando el modo táctil está desactivado.
 
 Vite requiere Node.js 20.19+ o 22.12+. La compilación produce `docs/`, que se publica mediante GitHub Pages.
 
@@ -77,3 +81,5 @@ GitHub Pages sirve `docs/` desde `main`. Las rutas relativas permiten ejecutar e
 Para publicar una actualización, ejecuta `npm ci`, `npm test` y `npm run build`; incluye los cambios de código y de `docs/` en un commit y súbelo a `main`. GitHub publicará automáticamente la carpeta compilada. La compilación se hace localmente, no en un workflow de Actions.
 
 Los récords se guardan en el navegador: los del servidor local no se trasladan al dominio público.
+
+Validación táctil: pruebas automatizadas de desplazamiento analógico, dos identificadores de puntero, cancelación/pausa, impulso simultáneo, misma puntuación de entrega y dibujo ampliado. Diseño inspeccionado en viewport móvil. Pendiente valorar comodidad y precisión de los pulgares en un smartphone físico.

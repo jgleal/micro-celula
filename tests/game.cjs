@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const elements=new Map(),context=new Proxy({},{get:(_t,key)=>key==='createRadialGradient'||key==='createLinearGradient'?()=>({addColorStop(){}}):()=>{},set:()=>true});
-function element(id){if(!elements.has(id))elements.set(id,{textContent:'',innerHTML:'',style:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},getContext(){return context},getBoundingClientRect(){return {width:900,height:600}},focus(){},matches(){return false},showModal(){},close(){},showPopover(){},hidePopover(){},onclick:null});return elements.get(id)}
+function element(id){if(!elements.has(id))elements.set(id,{textContent:'',innerHTML:'',style:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},getContext(){return context},getBoundingClientRect(){return {width:900,height:600}},focus(){},setPointerCapture(){},matches(){return false},showModal(){},close(){},showPopover(){},hidePopover(){},onclick:null});return elements.get(id)}
 const audioEvents=[];const param=()=>({setValueAtTime(v,t){audioEvents.push(['value',v,t])},setTargetAtTime(v,t){audioEvents.push(['target',v,t])},exponentialRampToValueAtTime(){}});
 class AudioContext{constructor(){this.currentTime=0;this.destination={}}resume(){return Promise.resolve()}createGain(){return {gain:param(),connect(){},disconnect(){}}}createOscillator(){return {frequency:param(),connect(){},disconnect(){},start(t){audioEvents.push(['start',t])},stop(){}}}}
 const storage=new Map();
@@ -106,4 +106,22 @@ assert.equal(s.waiting,true);nextLevel();assert.equal(running,false);assert.equa
 assert.ok(Number(localStorage.getItem('micro-round-eso-2-v3-best'))>0);
 selectCell(0);assert.equal(best,esoRecord);start();assert.equal(s.level,0);
 
+// Touch input adds analog control without bypassing rules; simultaneous fingers stay separate.
+touch.enabled=true;start();
+const touchX=s.player.x;
+const evt={pointerId:11,clientX:488,clientY:300,preventDefault(){}};
+const originalRect=$('touch-stick').getBoundingClientRect;
+$('touch-stick').getBoundingClientRect=()=>({left:0,top:0,width:900,height:600});
+beginStick(evt);assert.equal(touch.x,1);assert.equal(touch.y,0);
+beginStick({...evt,pointerId:12,clientX:400});assert.equal(touch.pointer,11);
+endStick({pointerId:12});assert.equal(touch.x,1);
+for(let i=0;i<10;i++)update(.016);assert.ok(s.player.x>touchX+10);
+dash();assert.ok(s.boost>0);assert.equal(touch.pointer,11);
+endStick({pointerId:11});assert.equal(touch.x,0);assert.equal(touch.pointer,null);
+beginStick(evt);togglePause();assert.equal(touch.x,0);assert.equal(touch.pointer,null);togglePause();
+start();beginStick({...evt,clientX:465});assert.ok(touch.x>0&&touch.x<1);clearControls();assert.equal(touch.x,0);
+start();s.cargo=['lip'];s.player={...s.player,x:structures.rel.x,y:structures.rel.y};transfer();assert.equal(s.progressBy.rel,1);assert.equal(s.score,100);
+touch.zoom=true;draw();touch.zoom=false;touch.enabled=false;draw();
+$('touch-stick').getBoundingClientRect=originalRect;
+assert.ok(!controlText('Pulsa E').includes('Entregar'));
 `,sandbox);console.log('OK: ambos cursos completos, recursos finitos, funciones independientes ESO, rutas Bach, récords separados, membranas, controles y audio.');
