@@ -1,0 +1,13 @@
+{
+  "name": "celula-en-juego",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "node tests/game.cjs"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}
